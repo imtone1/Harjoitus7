@@ -1,0 +1,93 @@
+Harjoitukset 7 tehtävä 4
+
+*************************
+Kysely 1
+*************************
+
+SELECT *
+FROM cities
+--
+
+db.cities.find()
+
+*************************
+Kysely 2
+*************************
+SELECT firstname, lastname, incomes
+FROM students
+WHERE incomes >= 14000
+ORDER BY incomes DESC
+--
+
+db.students.find( {incomes:{$gt:13999}}, { firstname : 1, lastname : 1 , incomes : 1 } ).sort({incomes:-1})
+
+*************
+Tuloste:
+*************
+{ _id: 2007,
+  lastname: 'Alainen',
+  firstname: 'Kim',
+  incomes: 18010.12 }
+{ _id: 2003,
+  lastname: 'Tiainen',
+  firstname: 'Sini',
+  incomes: 16010.32 }
+{ _id: 2002,
+  lastname: 'Saurus',
+  firstname: 'Tino',
+  incomes: 14010.22 }
+
+*************************
+Kysely 3
+*************************
+SELECT lastname, firstname, eyecolor, hometown
+FROM students
+WHERE hometown = 3
+AND eyecolor = "Sininen"
+ORDER BY lastname, firstname
+--
+
+db.students.find( {hometown: 3, eyecolor: "Sininen" }, { firstname : 1, lastname : 1 , eyecolor: 1, hometown: 1 } ).sort({lastname:1, firstname:1})
+
+*************
+Tuloste:
+*************
+{ _id: 2005,
+  lastname: 'Vainio',
+  firstname: 'Elo',
+  eyecolor: 'Sininen',
+  hometown: 3 }
+{ _id: 2004,
+  lastname: 'Vainio',
+  firstname: 'Vilja',
+  eyecolor: 'Sininen',
+  hometown: 3 }
+
+
+*************************
+Kysely 4
+*************************
+SELECT eyecolor, AVG(incomes)
+FROM students
+GROUP BY eyecolor
+ORDER BY AVG(incomes) DESC;
+
+--
+db.students.aggregate( [
+   {
+     $group: { 
+	_id: "$eyecolor",
+        "AVG(incomes)": { $avg: "$incomes" }
+     }
+   }
+   
+] ).sort({"AVG(incomes)":-1})
+
+*************
+Tuloste:
+*************
+
+{ _id: null, 'AVG(incomes)': 18010.12 }
+{ _id: 'Ruskea', 'AVG(incomes)': 13010.17 }
+{ _id: 'Harmaa', 'AVG(incomes)': 13010.12 }
+{ _id: 'Sininen', 'AVG(incomes)': 5336.7733333333335 }

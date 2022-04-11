@@ -1,0 +1,2 @@
+Example app listening on port 3000
+ 28/03/2022 12.45.57: GET /

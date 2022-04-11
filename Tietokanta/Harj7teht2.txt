@@ -1,0 +1,7 @@
+FullStack-ohjelmointi : Harjoitukset 7, tehtävä 2
+
+1.Muutettu muuttuja ja tietokantanimi.
+2.Lisätty "testidata"-sana yksi kirjain kerrallaan eri ObjectId:nä.
+3.Etsitty dokumentit "t"
+4.Lisätty status "A" kaikkiin dokumentteihin, joiden nro-alkion numero on enemmän kuin 10.
+5.Poistettu kaikki dokumentit, joissa x-alkio on null. Tämä poisti myös ne, joihin ei ole määriteltynä x-alkio, koska jos ne eivät ole määriteltynä niin oletuksena niihin on null.
